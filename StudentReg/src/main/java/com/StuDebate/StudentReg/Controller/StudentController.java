@@ -22,38 +22,46 @@ public class StudentController {
 	@Autowired
 	StudentService studentService;
 	
+	@RequestMapping("/home")
+	public String test() {
+		System.out.println("testing");
+		return "403.jsp";
+	} 
 	@RequestMapping("/list")
 	public String getAllStudents(Model model) {
 		List<Student> student= studentService.getAllStudent();
 		model.addAttribute("Student",student);
-		return "403.jsp";
+		return "list-Student.jsp";
 	}
 	
-	@RequestMapping("/showNewStudentForm")
+	@RequestMapping("/addStu")
 	public String showNewStudentForm(Model model) {
 		Student student=new Student();
 		model.addAttribute("Student", student);
-		return "Student-form";
+		return "Student-form.jsp";
 	}
 	@PostMapping("/save")
-	public String saveStudent(@ModelAttribute("student") Student student) {
+	public String saveStudent(@ModelAttribute("Student") Student student) {
+		System.out.println(student);
 		studentService.save(student);
-		return "redirect:/students/list";
+		
+		return "redirect:/list";
 	}
 	
 	@RequestMapping("/delete")
 	public String delete(@RequestParam("id") int id) {
+		System.out.println("deleteter");
 		studentService.deleteByid(id);
-		return "redirect:/students/list";
+		return "redirect:/list";
 		
 	}
 	
-	@RequestMapping("/showFormForUpdate")
+	@RequestMapping("/update")
 	public String formForUpdate(Model model,@RequestParam("id") int id) {
-		
+		System.out.println("marrrie angelina");
 		Student student = studentService.getStudentById(id);
 		model.addAttribute("Student",student);
-		return "Student-form";
+		return "Student-form.jsp";
 	}
 	
 	

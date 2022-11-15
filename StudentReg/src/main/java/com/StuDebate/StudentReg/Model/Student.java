@@ -7,8 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 @Entity
-@Table(name="customer")
+@Table(name="student")
 public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,44 +31,6 @@ public class Student {
 	@Column(name="country")
 	private String country;
 
-	public int getId() {
-		return id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public String getCourse() {
-		return course;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public void setCourse(String course) {
-		this.course = course;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
+	
 	
 }

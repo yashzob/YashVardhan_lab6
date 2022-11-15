@@ -25,15 +25,18 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.StuDebate.StudentReg.Service.UserDetailsServiceImpl;
+
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
+{
+	
 	@Autowired
 	@Bean
 	public UserDetailsService getUserDetailsService() {
-		return new MyUserDetailsService();
+		return new UserDetailsServiceImpl();
 	}
 	
 	@Bean
@@ -60,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http.csrf().disable();
 		http.headers().frameOptions().disable();
 		http.authorizeRequests()
-			.antMatchers("/showNewStudentForm")
+			.antMatchers("/list")
 				.hasAnyRole("User","Admin")
 			.and()
 			.authorizeRequests()
@@ -68,6 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.hasRole("Admin")
 			.anyRequest()
 				.authenticated()
+			.and()
+			.exceptionHandling().accessDeniedPage("/403.jsp")
 			.and()
 				.formLogin()
 			.and()
